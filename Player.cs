@@ -6,18 +6,41 @@ namespace DeckOfCards
 {
     public class Player
     {
-        public string Name;
-        public List<Card> Hand;
+        private string name;
+        private List<Card> hand;
 
-        public Card Draw()
+        public Player(string playerName)
         {
-            Card topCard = Deck.Cards[0];
-            return topCard;
+            name = playerName;
+            hand = new List<Card>();
         }
 
-        public Card discard(int idx)
+        public string Name
         {
-            Card lostCard = Hand.RemoveAt(idx);
+            get {return name;}
         }
+
+        public Card Draw(Deck theDeck)
+        {
+            Card drawnCard = theDeck.Deal();
+            hand.Add(drawnCard);
+            return drawnCard;
+        }
+
+        public Card Discard(int idx)
+        {
+            Card burnCard;
+            if (idx < hand.Count)
+            {
+                burnCard = hand[idx];
+                hand.RemoveAt(idx);
+                return burnCard;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
     }
 }

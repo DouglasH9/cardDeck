@@ -72,6 +72,13 @@ namespace DeckOfCards
             cards = newList;
         }
 
+        public Card Deal()
+        {
+            Card deltCard = cards[0];
+            cards.RemoveAt(0);
+            return deltCard;
+        }
+
         public void PrintDeck()
         {
             foreach(Card card in cards)
